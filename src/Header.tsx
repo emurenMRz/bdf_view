@@ -14,7 +14,7 @@ export function Header(props: HeaderProp) {
 			<table className='Basic-data'>
 				<tr><td>FONT</td><td>{props.basicData.font}</td></tr>
 				<tr><td>SIZE</td><td>{props.basicData.size?.join()}</td></tr>
-				<tr><td>FONTBOUNDINGBOX</td><td>{props.basicData.fontBoundingBox?.join()}</td></tr>
+				<tr><td>FONTBOUNDINGBOX</td><td>{Object.values(props.basicData.fontBoundingBox).join()}</td></tr>
 				<tr><td>CHARS</td><td>{props.basicData.chars}</td></tr>
 			</table>
 

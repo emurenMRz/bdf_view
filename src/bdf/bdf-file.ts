@@ -1,8 +1,15 @@
+export type BoundingBox = {
+	width: number;
+	height: number;
+	left: number;
+	bottom: number;
+}
+
 export class BDFBasicData {
-	font: string | undefined;
-	size: [number, number, number] | undefined;
-	fontBoundingBox: [number, number, number, number] | undefined;
-	chars: number | undefined;
+	font: string = "";
+	size: [number, number, number] = [0, 0, 0];
+	fontBoundingBox: BoundingBox = { width: 0, height: 0, left: 0, bottom: 0 };
+	chars: number = 0;
 }
 
 export class BDFProperties {
@@ -32,7 +39,7 @@ export class BDFCharData {
 	encoding: number = 0;
 	swidth: [number, number] = [0, 0];
 	dwidth: [number, number] = [0, 0];
-	bbx: [number, number, number, number] | undefined;
+	bbx: BoundingBox | undefined;
 	bitmap: string = "";
 
 	constructor(name: string) {
