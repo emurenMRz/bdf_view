@@ -99,7 +99,7 @@ export function FontList(props: FontListProp) {
 				parent.appendChild(e);
 
 			if (index < charData.length)
-				setTimeout(f, 0);
+				setTimeout(f, 1);
 		};
 		f();
 	}, [charData, fontBBX]);
