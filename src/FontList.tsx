@@ -23,7 +23,7 @@ function makeCanvas(bitmap: string, glyphBBX: BoundingBox, fontBBX: BoundingBox)
 	const dst = new Uint32Array(img.data.buffer);
 	const pitch = ((glyphWidth + 7) & ~0x7) >> 2;
 	const on = 0xffffffff;
-	const off = 0xff000000;
+	const off = 0;
 	const hex2dec = (str: string, index: number) => "0123456789ABCDEF".indexOf(str[index].toUpperCase());
 	let index = 0;
 	let offset = 0;

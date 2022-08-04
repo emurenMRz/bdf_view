@@ -4,6 +4,7 @@ import { BDFFile } from './bdf/bdf-file';
 import BDFParser from './bdf/bdf-parser';
 import { Header } from './Header';
 import { FontList } from './FontList';
+import { Expoert } from './Export';
 
 function App() {
   const [bsdfile, setBDFFile] = React.useState(null as unknown as BDFFile);
@@ -45,11 +46,17 @@ function App() {
         bsdfile === null
           ? <div className="BDFView">Drop the BDF file.</div>
           : <div className="BDFView">
-            <Header
-              version={bsdfile.version}
-              basicData={bsdfile.basicData}
-              properties={bsdfile.properties}
-            />
+            <div>
+              <Header
+                version={bsdfile.version}
+                basicData={bsdfile.basicData}
+                properties={bsdfile.properties}
+              />
+              <Expoert
+                basicData={bsdfile.basicData}
+                charData={bsdfile.charData}
+              />
+            </div>
             <FontList
               basicData={bsdfile.basicData}
               properties={bsdfile.properties}
