@@ -6,7 +6,7 @@ import { Header } from './Header';
 import { FontList } from './FontList';
 
 function App() {
-  const [bsdfile, setBDFFile] = React.useState(new BDFFile());
+  const [bsdfile, setBDFFile] = React.useState(null as unknown as BDFFile);
 
   const receiveFiles = (files: FileList | null) => {
     if (files === null) return;
@@ -41,18 +41,22 @@ function App() {
       <header className="App-header">
         <input type="file" className="Select-files" name="files[]" onChange={e => receiveFiles(e.target.files)} />
       </header >
-      <div className="BDFView">
-        <Header
-          version={bsdfile?.version}
-          basicData={bsdfile?.basicData}
-          properties={bsdfile?.properties}
-        />
-        <FontList
-          basicData={bsdfile?.basicData}
-          properties={bsdfile?.properties}
-          charData={bsdfile?.charData}
-        />
-      </div>
+      {
+        bsdfile === null
+          ? <div className="BDFView">Drop the BDF file.</div>
+          : <div className="BDFView">
+            <Header
+              version={bsdfile.version}
+              basicData={bsdfile.basicData}
+              properties={bsdfile.properties}
+            />
+            <FontList
+              basicData={bsdfile.basicData}
+              properties={bsdfile.properties}
+              charData={bsdfile.charData}
+            />
+          </div>
+      }
     </div >
   );
 }

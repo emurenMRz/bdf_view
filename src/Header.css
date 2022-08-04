@@ -1,0 +1,16 @@
+.BDFHeader {
+	width: 350px;
+	overflow: auto;
+}
+
+.Version {
+	background-color: white;
+	color: black;
+	text-align: center;
+}
+
+.Propertie-header {
+	margin: 1rem auto;
+	text-align: center;
+	font-size: 1.25rem;
+}

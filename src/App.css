@@ -1,6 +1,9 @@
 .App {
   width: 100%;
   min-height: 100vh;
+  background-color: #101010;
+
+  overflow: hidden;
 }
 
 .App-header {
@@ -13,10 +16,12 @@
 }
 
 .BDFView {
-  background-color: #101010;
+  position: absolute;
 
-  width: 100%;
-  min-height: calc(100vh - 1.65rem);
+  left: 0;
+  right: 0;
+  top: 2rem;
+  bottom: 0;
   
   display: flex;
   flex-direction: row;
