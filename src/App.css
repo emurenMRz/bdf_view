@@ -29,3 +29,8 @@
   font-size: 12px;
   color: white;
 }
+
+.Left-pane {
+	width: 350px;
+  overflow: auto;
+}

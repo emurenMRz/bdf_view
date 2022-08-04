@@ -1,5 +1,5 @@
 .Font-list {
-	width: 100%;
+	width: calc(100% - 350px);
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(16px, 1fr));
 	align-content: start;

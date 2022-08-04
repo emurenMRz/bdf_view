@@ -1,7 +1,9 @@
 .Export {
+	width: calc(100% - .5rem);
 	margin: 1rem .25rem;
 	padding: 1em;
 	border: 3px double #202040;
+	box-sizing: border-box;
 }
 
 .Settings-header {

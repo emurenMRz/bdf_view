@@ -46,7 +46,7 @@ function App() {
         bsdfile === null
           ? <div className="BDFView">Drop the BDF file.</div>
           : <div className="BDFView">
-            <div>
+            <div className="Left-pane">
               <Header
                 version={bsdfile.version}
                 basicData={bsdfile.basicData}
