@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# bdf_view
+
+This software is a BDF font viewer.
+
+PNG export is supported.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
