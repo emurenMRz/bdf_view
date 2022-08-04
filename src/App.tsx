@@ -7,6 +7,7 @@ import { FontList } from './FontList';
 import { Expoert } from './Export';
 
 function App() {
+  const [inFileName, setInFileName] = React.useState(null as unknown as string);
   const [bsdfile, setBDFFile] = React.useState(null as unknown as BDFFile);
 
   const receiveFiles = (files: FileList | null) => {
@@ -16,6 +17,10 @@ function App() {
       const text = e.target?.result;
       if (typeof text !== "string") return;
       setBDFFile(BDFParser(text.split('\n')));
+      let fname = files[0].name;
+      if (fname.endsWith(".bdf"))
+        fname = fname.substring(0, fname.length - 4);
+      setInFileName(fname);
     };
     reader.readAsText(files[0]);
   }
@@ -53,6 +58,7 @@ function App() {
                 properties={bsdfile.properties}
               />
               <Expoert
+                inFileName={inFileName}
                 basicData={bsdfile.basicData}
                 charData={bsdfile.charData}
               />

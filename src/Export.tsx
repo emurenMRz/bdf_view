@@ -3,6 +3,7 @@ import { BDFBasicData, BDFCharData } from './bdf/bdf-file';
 import "./Export.css";
 
 type ExportProp = {
+	inFileName: string;
 	basicData: BDFBasicData;
 	charData: BDFCharData[];
 }
@@ -79,7 +80,7 @@ export function Expoert(props: ExportProp) {
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement("a");
 			document.body.appendChild(a);
-			a.download = "test.png";
+			a.download = `${props.inFileName}.png`;
 			a.href = url;
 			a.click();
 			a.remove();
@@ -95,7 +96,7 @@ export function Expoert(props: ExportProp) {
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement("a");
 		document.body.appendChild(a);
-		a.download = "test.json";
+		a.download = `${props.inFileName}.json`;
 		a.href = url;
 		a.click();
 		a.remove();
