@@ -44,12 +44,14 @@ export function Header(props: HeaderProp) {
 			<div className="Propertie-header">Properties</div>
 
 			<table className='Properties'>
-				{Object.entries(props.properties).map((prop, index) => {
-					const value = prop[1];
-					if (value !== undefined)
-						return <tr key={index}><td>{propNames[prop[0]]}</td><td>{value}</td></tr>;
-					return null;
-				})}
+				<tbody>
+					{Object.entries(props.properties).map((prop, index) => {
+						const value = prop[1];
+						if (value !== undefined)
+							return <tr key={index}><td>{propNames[prop[0]]}</td><td>{value}</td></tr>;
+						return null;
+					})}
+				</tbody>
 			</table>
 		</div>
 	);
