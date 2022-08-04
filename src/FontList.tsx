@@ -85,6 +85,8 @@ export function FontList(props: FontListProp) {
 
 		let index = 0;
 		const f = () => {
+			if (index !== parent.children.length) return;
+
 			const elems: HTMLCanvasElement[] = [];
 			for (let i = 0; ; ++i) {
 				if (i >= 256 || index + i >= charData.length) {
