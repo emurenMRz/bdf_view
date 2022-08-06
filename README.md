@@ -1,7 +1,7 @@
-# bdf_view
+# BDF Font viewer
 
-This software is a BDF font viewer.\
-PNG export is supported.
+Reads and displays BDF font files.\
+You can output a list of rendered glyphs in PNG format or download the coordinate information in JSON format.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
