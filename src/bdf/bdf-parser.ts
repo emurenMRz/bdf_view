@@ -8,26 +8,28 @@ function PropertiesParser(properties: BDFProperties, lines: string[], startLine:
 		const line = lines[l].match(/^([A-Z_]+?) (.+)$/);
 		if (line === null) throw new TypeError(`PropertiesParser: unsupport item: ${lines[l]}`);
 
+		const normalizeString = (s: string) => s.trim().replace(/^"(.*)"$/, "$1").replaceAll(/""/g, '"');
+
 		switch (line[1]) {
-			case "FONTNAME_REGISTRY": properties.fontnameRegistry = line[2].trim(); break;
-			case "FOUNDRY": properties.foundry = line[2].trim(); break;
-			case "FAMILY": properties.family = line[2].trim(); break;
-			case "WEIGHT_NAME": properties.weightName = line[2].trim(); break;
-			case "SLANT": properties.slant = line[2].trim(); break;
-			case "SETWIDTH_NAME": properties.setwidthName = line[2].trim(); break;
-			case "ADD_STYLE_NAME": properties.addStyleName = line[2].trim(); break;
+			case "FONTNAME_REGISTRY": properties.fontnameRegistry = normalizeString(line[2]); break;
+			case "FOUNDRY": properties.foundry = normalizeString(line[2]); break;
+			case "FAMILY": properties.family = normalizeString(line[2]); break;
+			case "WEIGHT_NAME": properties.weightName = normalizeString(line[2]); break;
+			case "SLANT": properties.slant = normalizeString(line[2]); break;
+			case "SETWIDTH_NAME": properties.setwidthName = normalizeString(line[2]); break;
+			case "ADD_STYLE_NAME": properties.addStyleName = normalizeString(line[2]); break;
 			case "PIXEL_SIZE": properties.pixelSize = +line[2]; break;
 			case "POINT_SIZE": properties.pointSize = +line[2]; break;
 			case "RESOLUTION_X": properties.resolutionX = +line[2]; break;
 			case "RESOLUTION_Y": properties.resolutionY = +line[2]; break;
-			case "SPACING": properties.spacing = line[2].trim(); break;
+			case "SPACING": properties.spacing = normalizeString(line[2]); break;
 			case "AVERAGE_WIDTH": properties.averageWidth = +line[2]; break;
-			case "CHARSET_REGISTRY": properties.charsetRegistry = line[2].trim(); break;
-			case "CHARSET_ENCODING": properties.charsetEncoding = line[2].trim(); break;
+			case "CHARSET_REGISTRY": properties.charsetRegistry = normalizeString(line[2]); break;
+			case "CHARSET_ENCODING": properties.charsetEncoding = normalizeString(line[2]); break;
 			case "DEFAULT_CHAR": properties.defaultChar = +line[2]; break;
 			case "FONT_DESCENT": properties.fontDescent = +line[2]; break;
 			case "FONT_ASCENT": properties.fontAscent = +line[2]; break;
-			case "COPYRIGHT": properties.copyright = line[2].trim(); break;
+			case "COPYRIGHT": properties.copyright = normalizeString(line[2]); break;
 		}
 	}
 	return endLine;
