@@ -92,11 +92,13 @@ export default function BDFParser(lines: string[]): BDFFile {
 		throw new TypeError("BDFParser: unsupport format.");
 
 	for (let l = 1; l < lines.length - 1; ++l) {
+		if (lines[l].startsWith("COMMENT"))
+			continue;
+
 		const line = lines[l].match(/^([A-Z_]+?) (.*)$/);
-		if (line === null) break;
+		if (line === null) continue;
 
 		switch (line[1]) {
-			case "COMMENT": break;
 			case "FONT": bdfFile.basicData.font = line[2].trim(); break;
 			case "SIZE": {
 				const n = line[2].split(" ").map(v => +v);
