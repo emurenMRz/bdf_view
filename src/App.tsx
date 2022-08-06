@@ -59,8 +59,7 @@ function App() {
               />
               <Expoert
                 inFileName={inFileName}
-                basicData={bsdfile.basicData}
-                charData={bsdfile.charData}
+                bdfFile={bsdfile}
               />
             </div>
             <FontList

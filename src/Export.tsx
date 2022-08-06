@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { BDFBasicData, BDFCharData } from './bdf/bdf-file';
+import { BDFFile } from './bdf/bdf-file';
 import "./Export.css";
 
 type ExportProp = {
 	inFileName: string;
-	basicData: BDFBasicData;
-	charData: BDFCharData[];
+	bdfFile: BDFFile;
 }
 
 export function Expoert(props: ExportProp) {
-	const chars = props.basicData.chars;
+	const bdf = props.bdfFile;
+	const chars = bdf.basicData.chars;
 	const defaultColumns = 128;
-	const fontWidth = props.basicData.fontBoundingBox.width;
-	const fontHeight = props.basicData.fontBoundingBox.height;
+	const fontWidth = bdf.basicData.fontBoundingBox.width;
+	const fontHeight = bdf.basicData.fontBoundingBox.height;
 	const calcRow = useCallback((columns: number) => Math.ceil(chars / columns), [chars]);
 
 	const number = useRef(null);
@@ -22,7 +22,6 @@ export function Expoert(props: ExportProp) {
 	const [glyphRows, setGlyphRows] = useState(calcRow(defaultColumns));
 	const [imageWidth, setImageWidth] = useState(defaultColumns * fontWidth);
 	const [imageHeight, setImageHeight] = useState(calcRow(defaultColumns) * fontHeight);
-
 
 	useEffect(() => {
 		const f = () => {
@@ -90,9 +89,13 @@ export function Expoert(props: ExportProp) {
 
 	const handleExportJSON = (e: React.MouseEvent<HTMLButtonElement>) => {
 		const indexes: { [key: number]: [number, number] } = {};
-		props.charData.forEach((v, i) => indexes[v.encoding] = [(i % glyphColumns) * fontWidth, (i / glyphColumns | 0) * fontHeight]);
+		bdf.charData.forEach((v, i) => indexes[v.encoding] = [(i % glyphColumns) * fontWidth, (i / glyphColumns | 0) * fontHeight]);
 
-		const blob = new Blob([JSON.stringify({ width: fontWidth, height: fontHeight, indexes })], { type: "application/json" });
+		let charset = bdf.properties.charsetRegistry;
+		if (charset !== undefined && bdf.properties.charsetEncoding !== undefined)
+			charset += `-${bdf.properties.charsetEncoding}`;
+
+		const blob = new Blob([JSON.stringify({ width: fontWidth, height: fontHeight, charset, indexes })], { type: "application/json" });
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement("a");
 		document.body.appendChild(a);
@@ -107,8 +110,8 @@ export function Expoert(props: ExportProp) {
 		<div className="Export">
 			<div className="Settings-header">Export settings:</div>
 			<label>
-				Glyph columns: <input ref={number} type="number" min="1" max={props.basicData.chars} defaultValue={defaultColumns} onChange={handleChangeNumber} />
-				<input ref={range} className="Slider" type="range" name="columns" min="1" max={props.basicData.chars} defaultValue={defaultColumns} onChange={handleChangeRange} />
+				Glyph columns: <input ref={number} type="number" min="1" max={chars} defaultValue={defaultColumns} onChange={handleChangeNumber} />
+				<input ref={range} className="Slider" type="range" name="columns" min="1" max={chars} defaultValue={defaultColumns} onChange={handleChangeRange} />
 			</label>
 			<label>Glyph rows: {glyphRows}</label>
 			<label>Image width: {imageWidth} px</label>
